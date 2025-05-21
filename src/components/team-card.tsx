@@ -1,11 +1,11 @@
-import Image from "next/image"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import type { Team } from "@/lib/types"
+import Image from "next/image";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import type { Team } from "@/lib/types";
 
 interface TeamCardProps {
-  team: Team
+  team: Team;
 }
 
 export function TeamCard({ team }: TeamCardProps) {
@@ -17,7 +17,12 @@ export function TeamCard({ team }: TeamCardProps) {
           style={{ backgroundColor: `${team.color}20` }} // Using team color with low opacity
         >
           <div className="relative w-24 h-24">
-            <Image src={team.logo || "/placeholder.svg"} alt={`${team.name} logo`} fill className="object-contain" />
+            <Image
+              src={team.logo || "/placeholder.svg"}
+              alt={`${team.name} logo`}
+              fill
+              className="object-contain"
+            />
           </div>
         </div>
         <h3 className="font-semibold text-lg text-center">{team.name}</h3>
@@ -28,5 +33,5 @@ export function TeamCard({ team }: TeamCardProps) {
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }

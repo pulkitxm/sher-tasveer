@@ -6,8 +6,21 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp, Upload, Check, Download, Share, Edit, RotateCw } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+  ChevronDown,
+  ChevronUp,
+  Upload,
+  Check,
+  Download,
+  Share,
+  Edit,
+  RotateCw,
+} from "lucide-react";
 
 interface ImageUploaderProps {
   onImageProcessed?: (resultImageUrl: string) => void;
@@ -22,7 +35,10 @@ interface ImagePosition {
   rotation: number;
 }
 
-export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUploaderProps) {
+export function ImageUploader({
+  onImageProcessed,
+  placeholderImage,
+}: ImageUploaderProps) {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [resultImage, setResultImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -87,7 +103,13 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
       ctx.imageSmoothingQuality = "high";
       ctx.scale(scaleFactor, scaleFactor);
 
-      ctx.drawImage(placeholderImg, 0, 0, placeholderImg.width, placeholderImg.height);
+      ctx.drawImage(
+        placeholderImg,
+        0,
+        0,
+        placeholderImg.width,
+        placeholderImg.height,
+      );
 
       const uploadedImg = new window.Image();
       uploadedImg.crossOrigin = "anonymous";
@@ -97,7 +119,10 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
         uploadedImg.onload = resolve;
       });
 
-      const baseScale = Math.min(placeholderImg.width / uploadedImg.width, placeholderImg.height / uploadedImg.height);
+      const baseScale = Math.min(
+        placeholderImg.width / uploadedImg.width,
+        placeholderImg.height / uploadedImg.height,
+      );
       const finalScale = baseScale * position.scale;
       const newWidth = uploadedImg.width * finalScale;
       const newHeight = uploadedImg.height * finalScale;
@@ -112,7 +137,13 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
         ctx.save();
         ctx.translate(x + newWidth / 2, y + newHeight / 2);
         ctx.rotate((position.rotation * Math.PI) / 180);
-        ctx.drawImage(uploadedImg, -newWidth / 2, -newHeight / 2, newWidth, newHeight);
+        ctx.drawImage(
+          uploadedImg,
+          -newWidth / 2,
+          -newHeight / 2,
+          newWidth,
+          newHeight,
+        );
         ctx.restore();
       } else {
         ctx.drawImage(uploadedImg, x, y, newWidth, newHeight);
@@ -136,14 +167,22 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
 
   return (
     <div className="flex flex-col items-center gap-3 w-full max-w-md mx-auto">
-      <input type="file" ref={fileInputRef} onChange={handleFileChange} accept="image/*" className="hidden" />
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        accept="image/*"
+        className="hidden"
+      />
 
       {!uploadedImage ? (
         <div className="w-full flex flex-col items-center gap-4 p-8 border-2 border-dashed rounded-lg">
           <Upload className="h-10 w-10 text-muted-foreground" />
           <div className="text-center space-y-1">
             <h3 className="font-medium">Upload an image</h3>
-            <p className="text-sm text-muted-foreground">Drop your image here or click to browse</p>
+            <p className="text-sm text-muted-foreground">
+              Drop your image here or click to browse
+            </p>
           </div>
           <Button onClick={handleUploadClick} variant="secondary" size="sm">
             Select Image
@@ -152,15 +191,32 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
       ) : (
         <div className="w-full space-y-3">
           <div className="relative w-full aspect-square rounded-lg overflow-hidden border bg-muted/20">
-            <Image src={uploadedImage} alt="Uploaded image" fill className="object-contain" priority />
+            <Image
+              src={uploadedImage}
+              alt="Uploaded image"
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
 
           {/* Hidden controls by default */}
-          <Collapsible open={isControlsOpen} onOpenChange={setIsControlsOpen} className="w-full border rounded-lg">
+          <Collapsible
+            open={isControlsOpen}
+            onOpenChange={setIsControlsOpen}
+            className="w-full border rounded-lg"
+          >
             <CollapsibleTrigger asChild>
-              <Button variant="ghost" className="flex w-full justify-between p-2 h-auto rounded-md text-sm">
+              <Button
+                variant="ghost"
+                className="flex w-full justify-between p-2 h-auto rounded-md text-sm"
+              >
                 <span>{isControlsOpen ? "Hide controls" : "Adjust image"}</span>
-                {isControlsOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                {isControlsOpen ? (
+                  <ChevronUp className="h-4 w-4" />
+                ) : (
+                  <ChevronDown className="h-4 w-4" />
+                )}
               </Button>
             </CollapsibleTrigger>
 
@@ -172,7 +228,9 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     <Label htmlFor="position-x" className="text-xs">
                       Position X
                     </Label>
-                    <span className="text-xs text-muted-foreground">{position.x}%</span>
+                    <span className="text-xs text-muted-foreground">
+                      {position.x}%
+                    </span>
                   </div>
                   <Slider
                     id="position-x"
@@ -180,7 +238,9 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     max={100}
                     step={1}
                     value={[position.x]}
-                    onValueChange={(values) => setPosition((prev) => ({ ...prev, x: values[0] }))}
+                    onValueChange={(values) =>
+                      setPosition((prev) => ({ ...prev, x: values[0] }))
+                    }
                     className="h-4"
                   />
                 </div>
@@ -190,7 +250,9 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     <Label htmlFor="position-y" className="text-xs">
                       Position Y
                     </Label>
-                    <span className="text-xs text-muted-foreground">{position.y}%</span>
+                    <span className="text-xs text-muted-foreground">
+                      {position.y}%
+                    </span>
                   </div>
                   <Slider
                     id="position-y"
@@ -198,7 +260,9 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     max={100}
                     step={1}
                     value={[position.y]}
-                    onValueChange={(values) => setPosition((prev) => ({ ...prev, y: values[0] }))}
+                    onValueChange={(values) =>
+                      setPosition((prev) => ({ ...prev, y: values[0] }))
+                    }
                     className="h-4"
                   />
                 </div>
@@ -208,7 +272,9 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     <Label htmlFor="scale" className="text-xs">
                       Size
                     </Label>
-                    <span className="text-xs text-muted-foreground">{(position.scale * 100).toFixed(0)}%</span>
+                    <span className="text-xs text-muted-foreground">
+                      {(position.scale * 100).toFixed(0)}%
+                    </span>
                   </div>
                   <Slider
                     id="scale"
@@ -216,7 +282,9 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     max={2}
                     step={0.05}
                     value={[position.scale]}
-                    onValueChange={(values) => setPosition((prev) => ({ ...prev, scale: values[0] }))}
+                    onValueChange={(values) =>
+                      setPosition((prev) => ({ ...prev, scale: values[0] }))
+                    }
                     className="h-4"
                   />
                 </div>
@@ -226,7 +294,9 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     <Label htmlFor="opacity" className="text-xs">
                       Opacity
                     </Label>
-                    <span className="text-xs text-muted-foreground">{(position.opacity * 100).toFixed(0)}%</span>
+                    <span className="text-xs text-muted-foreground">
+                      {(position.opacity * 100).toFixed(0)}%
+                    </span>
                   </div>
                   <Slider
                     id="opacity"
@@ -234,7 +304,9 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     max={1}
                     step={0.05}
                     value={[position.opacity]}
-                    onValueChange={(values) => setPosition((prev) => ({ ...prev, opacity: values[0] }))}
+                    onValueChange={(values) =>
+                      setPosition((prev) => ({ ...prev, opacity: values[0] }))
+                    }
                     className="h-4"
                   />
                 </div>
@@ -244,7 +316,9 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     <Label htmlFor="rotation" className="text-xs">
                       Rotation
                     </Label>
-                    <span className="text-xs text-muted-foreground">{position.rotation}°</span>
+                    <span className="text-xs text-muted-foreground">
+                      {position.rotation}°
+                    </span>
                   </div>
                   <Slider
                     id="rotation"
@@ -252,7 +326,9 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     max={360}
                     step={1}
                     value={[position.rotation]}
-                    onValueChange={(values) => setPosition((prev) => ({ ...prev, rotation: values[0] }))}
+                    onValueChange={(values) =>
+                      setPosition((prev) => ({ ...prev, rotation: values[0] }))
+                    }
                     className="h-4"
                   />
                 </div>
@@ -291,7 +367,14 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                   fill="none"
                   viewBox="0 0 24 24"
                 >
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
                   <path
                     className="opacity-75"
                     fill="currentColor"
@@ -315,17 +398,34 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium">Result</h3>
             <div className="flex gap-1">
-              <Button variant="ghost" size="sm" onClick={() => setIsControlsOpen(true)} className="text-xs h-7 px-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsControlsOpen(true)}
+                className="text-xs h-7 px-2"
+              >
                 <Edit className="h-3 w-3 mr-1" /> Edit
               </Button>
-              <Button variant="ghost" size="sm" onClick={() => setResultImage(null)} className="text-xs h-7 px-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setResultImage(null)}
+                className="text-xs h-7 px-2"
+              >
                 Reset
               </Button>
             </div>
           </div>
 
           <div className="relative w-full aspect-square rounded-lg overflow-hidden border">
-            <Image src={resultImage} alt="Result image" fill className="object-contain" priority quality={100} />
+            <Image
+              src={resultImage}
+              alt="Result image"
+              fill
+              className="object-contain"
+              priority
+              quality={100}
+            />
           </div>
 
           <div className="flex gap-2 w-full">
@@ -353,7 +453,11 @@ export function ImageUploader({ onImageProcessed,placeholderImage }: ImageUpload
                     fetch(resultImage)
                       .then((res) => res.blob())
                       .then((blob) => {
-                        const file = new File([blob], "custom-image-result.png", { type: "image/png" });
+                        const file = new File(
+                          [blob],
+                          "custom-image-result.png",
+                          { type: "image/png" },
+                        );
                         navigator
                           .share({
                             title: "My Custom Image",

@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Navbar } from "@/components/navbar"
-import { HomeIcon, AlertTriangleIcon } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/navbar";
+import { HomeIcon, AlertTriangleIcon } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -17,7 +17,8 @@ export default function NotFound() {
         <h1 className="text-4xl font-bold mb-4">Team Not Found</h1>
 
         <p className="text-muted-foreground max-w-md mb-8">
-          We couldn't find the team you're looking for. It may have been removed or you might have mistyped the address.
+          We couldn't find the team you're looking for. It may have been removed
+          or you might have mistyped the address.
         </p>
 
         <div className="flex gap-4">
@@ -34,5 +35,5 @@ export default function NotFound() {
         </div>
       </main>
     </div>
-  )
+  );
 }

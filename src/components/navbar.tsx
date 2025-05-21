@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { ThemeToggle } from "@/components/theme-toggle"
-import { BirdIcon as Cricket } from "lucide-react"
-import Link from "next/link"
+import { ThemeToggle } from "@/components/theme-toggle";
+import { BirdIcon as Cricket } from "lucide-react";
+import Link from "next/link";
 
 export function Navbar() {
   return (
@@ -17,5 +17,5 @@ export function Navbar() {
         </div>
       </div>
     </header>
-  )
+  );
 }
