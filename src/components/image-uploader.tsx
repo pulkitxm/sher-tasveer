@@ -205,7 +205,6 @@ export function ImageUploader({
             />
           </div>
 
-          
           <Collapsible
             open={isControlsOpen}
             onOpenChange={setIsControlsOpen}
@@ -227,7 +226,6 @@ export function ImageUploader({
 
             <CollapsibleContent className="p-3 space-y-3">
               <div className="grid gap-3 text-sm">
-                
                 <div className="space-y-1.5">
                   <div className="flex justify-between">
                     <Label htmlFor="position-x" className="text-xs">
@@ -474,6 +472,7 @@ export function ImageUploader({
                     copyToClipboard();
                   }
                 } catch (error) {
+                  console.error("Failed to share image:", error);
                   copyToClipboard();
                 }
 
@@ -503,7 +502,6 @@ export function ImageUploader({
         </div>
       )}
 
-      
       <canvas ref={canvasRef} style={{ display: "none" }} />
     </div>
   );

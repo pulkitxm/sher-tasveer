@@ -11,7 +11,7 @@ export default function Home() {
     teams.map((team) => ({
       ...team,
       count: 0,
-    }))
+    })),
   );
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,7 +23,7 @@ export default function Home() {
         teams.map((team) => ({
           ...team,
           count: metrics.find((m) => m.slug === team.slug)?.count || 0,
-        }))
+        })),
       );
       setIsLoading(false);
     } catch (error) {
@@ -48,7 +48,11 @@ export default function Home() {
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-center mb-8 text-foreground">
           Cricket Teams
-          {isLoading && <span className="ml-2 text-sm font-normal text-muted-foreground">(Loading...)</span>}
+          {isLoading && (
+            <span className="ml-2 text-sm font-normal text-muted-foreground">
+              (Loading...)
+            </span>
+          )}
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

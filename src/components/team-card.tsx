@@ -27,9 +27,7 @@ export function TeamCard({ team, count }: TeamCardProps) {
           </div>
         </div>
         <h3 className="font-semibold text-lg text-center">{team.name}</h3>
-        <p className="text-center text-muted-foreground">
-          {count} votes
-        </p>
+        <p className="text-center text-muted-foreground">{count} votes</p>
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button className="w-full" variant="outline" asChild>
