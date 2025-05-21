@@ -21,10 +21,12 @@ import {
   Edit,
   RotateCw,
 } from "lucide-react";
+import { incrementTeamCount } from "@/actions/team";
 
 interface ImageUploaderProps {
   onImageProcessed?: (resultImageUrl: string) => void;
   placeholderImage?: string;
+  slug: string;
 }
 
 interface ImagePosition {
@@ -38,6 +40,7 @@ interface ImagePosition {
 export function ImageUploader({
   onImageProcessed,
   placeholderImage,
+  slug,
 }: ImageUploaderProps) {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [resultImage, setResultImage] = useState<string | null>(null);
@@ -73,6 +76,8 @@ export function ImageUploader({
   const processImage = async () => {
     if (!uploadedImage) return;
 
+    incrementTeamCount(slug);
+
     setIsProcessing(true);
 
     try {
@@ -89,7 +94,7 @@ export function ImageUploader({
 
       const placeholderImg = new window.Image();
       placeholderImg.crossOrigin = "anonymous";
-      placeholderImg.src = placeholderImage.src;
+      placeholderImg.src = placeholderImage || "";
 
       await new Promise((resolve) => {
         placeholderImg.onload = resolve;
@@ -200,7 +205,7 @@ export function ImageUploader({
             />
           </div>
 
-          {/* Hidden controls by default */}
+          
           <Collapsible
             open={isControlsOpen}
             onOpenChange={setIsControlsOpen}
@@ -222,7 +227,7 @@ export function ImageUploader({
 
             <CollapsibleContent className="p-3 space-y-3">
               <div className="grid gap-3 text-sm">
-                {/* Simplified controls with less space */}
+                
                 <div className="space-y-1.5">
                   <div className="flex justify-between">
                     <Label htmlFor="position-x" className="text-xs">
@@ -498,7 +503,7 @@ export function ImageUploader({
         </div>
       )}
 
-      {/* Hidden canvas for processing */}
+      
       <canvas ref={canvasRef} style={{ display: "none" }} />
     </div>
   );

@@ -6,9 +6,10 @@ import type { Team } from "@/lib/types";
 
 interface TeamCardProps {
   team: Team;
+  count: number;
 }
 
-export function TeamCard({ team }: TeamCardProps) {
+export function TeamCard({ team, count }: TeamCardProps) {
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-md">
       <CardContent className="p-4">
@@ -26,6 +27,9 @@ export function TeamCard({ team }: TeamCardProps) {
           </div>
         </div>
         <h3 className="font-semibold text-lg text-center">{team.name}</h3>
+        <p className="text-center text-muted-foreground">
+          {count} votes
+        </p>
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button className="w-full" variant="outline" asChild>

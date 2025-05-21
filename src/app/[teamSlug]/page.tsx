@@ -5,11 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { notFound } from "next/navigation";
 import { ImageUploader } from "@/components/image-uploader";
 
-export default async function TeamPage({
-  params,
-}: {
-  params: { teamSlug: string };
-}) {
+export default async function TeamPage({ params }: { params: { teamSlug: string } }) {
   const { teamSlug } = params;
   const team = teams.find((team) => team.slug === teamSlug);
 
@@ -37,10 +33,7 @@ export default async function TeamPage({
               </div>
 
               <div>
-                <h1
-                  className="text-2xl sm:text-3xl font-bold"
-                  style={{ color: team.color }}
-                >
+                <h1 className="text-2xl sm:text-3xl font-bold" style={{ color: team.color }}>
                   {team.name}
                 </h1>
               </div>
@@ -51,13 +44,11 @@ export default async function TeamPage({
         {/* Image Upload and Processing Section */}
         <Card className="overflow-hidden max-w-3xl mx-auto">
           <CardContent className="p-6">
-            <h2 className="text-xl font-semibold mb-4 text-center">
-              Create Your Custom Image
-            </h2>
+            <h2 className="text-xl font-semibold mb-4 text-center">Create Your Custom Image</h2>
             <p className="text-center text-muted-foreground mb-6 text-sm">
               Upload your image and we'll place it on our template
             </p>
-            <ImageUploader placeholderImage={team.placeholderImage.src} />
+            <ImageUploader placeholderImage={team.placeholderImage.src} slug={team.slug} />
           </CardContent>
         </Card>
       </main>
