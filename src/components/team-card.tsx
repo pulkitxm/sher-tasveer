@@ -1,8 +1,8 @@
 import Image from "next/image"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import type { Team } from "@/lib/types"
 import Link from "next/link"
+import type { Team } from "@/lib/types"
 
 interface TeamCardProps {
   team: Team
@@ -23,9 +23,9 @@ export function TeamCard({ team }: TeamCardProps) {
         <h3 className="font-semibold text-lg text-center">{team.name}</h3>
       </CardContent>
       <CardFooter className="p-4 pt-0">
-        <Link className="w-full" href={`/team/${team.slug}`}><Button className="w-full cursor-pointer" variant="outline">
-          Vote Now
-        </Button></Link>
+        <Button className="w-full" variant="outline" asChild>
+          <Link href={`/${team.slug}`}>View Team</Link>
+        </Button>
       </CardFooter>
     </Card>
   )

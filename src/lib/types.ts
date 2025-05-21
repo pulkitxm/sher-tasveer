@@ -5,4 +5,5 @@ export type Team = {
     logo: StaticImageData;
     color: string;
     slug: string;
+    placeholderImage: StaticImageData;
 }
