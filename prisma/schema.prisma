@@ -11,4 +11,5 @@ model Team {
   id Int @id @default(autoincrement())
   slug String @unique
   count Int
+  actualCount Int @default(0)
 }

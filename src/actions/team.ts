@@ -23,6 +23,7 @@ export async function incrementTeamCount(slug: string) {
       data: {
         slug,
         count: 1,
+        actualCount: 1,
       },
     });
   } else {
@@ -32,6 +33,7 @@ export async function incrementTeamCount(slug: string) {
       },
       data: {
         count: team.count + 1,
+        actualCount: team.actualCount + 1,
       },
     });
   }
