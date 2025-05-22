@@ -8,7 +8,7 @@ export function ICON() {
       width="800px"
       height="800px"
       viewBox="0 0 698.696 698.696"
-	  className="w-6 h-6 fill-black dark:fill-white"
+      className="w-6 h-6 fill-black dark:fill-white"
     >
       <g>
         <g>

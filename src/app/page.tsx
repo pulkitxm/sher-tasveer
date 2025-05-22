@@ -4,7 +4,7 @@ import { teams } from "@/lib/data";
 import { TeamCard } from "@/components/team-card";
 import { Navbar } from "@/components/navbar";
 import { getTeamWiseMetrics } from "@/actions/team";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function Home() {
   const [teamsWithMetrics, setTeamsWithMetrics] = useState(
@@ -13,6 +13,12 @@ export default function Home() {
       count: 0,
     })),
   );
+
+  const sortedTeams = useMemo(
+    () => teamsWithMetrics.sort((a, b) => b.count - a.count),
+    [teamsWithMetrics],
+  );
+
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchMetrics = async () => {
@@ -56,7 +62,7 @@ export default function Home() {
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {teamsWithMetrics.map((team, index) => (
+          {sortedTeams.map((team, index) => (
             <TeamCard key={index} count={team.count} team={team} />
           ))}
         </div>

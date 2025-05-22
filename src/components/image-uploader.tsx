@@ -60,7 +60,7 @@ export function ImageUploader({
   };
 
   const handleImageFile = (file: File) => {
-    if (file.type.startsWith('image/')) {
+    if (file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onload = (event) => {
         setUploadedImage(event.target?.result as string);
@@ -83,10 +83,10 @@ export function ImageUploader({
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
-    
+
     const files = Array.from(e.dataTransfer.files);
-    const imageFile = files.find(file => file.type.startsWith('image/'));
-    
+    const imageFile = files.find((file) => file.type.startsWith("image/"));
+
     if (imageFile) {
       handleImageFile(imageFile);
     }
@@ -104,7 +104,7 @@ export function ImageUploader({
 
     try {
       // Add hardcoded delay for trust/processing feel
-      await new Promise(resolve => setTimeout(resolve, DELAY_GENERATE));
+      await new Promise((resolve) => setTimeout(resolve, DELAY_GENERATE));
 
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d", {
@@ -322,23 +322,25 @@ export function ImageUploader({
       />
 
       {!uploadedImage ? (
-        <div 
+        <div
           className={`w-full flex flex-col items-center gap-4 p-8 border-2 border-dashed rounded-xl transition-all cursor-pointer hover:bg-muted/50 ${
-            isDragOver 
-              ? 'border-primary bg-primary/5 scale-105' 
-              : 'border-muted-foreground/25'
+            isDragOver
+              ? "border-primary bg-primary/5 scale-105"
+              : "border-muted-foreground/25"
           }`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           onClick={handleUploadClick}
         >
-          <Upload className={`h-12 w-12 transition-colors ${
-            isDragOver ? 'text-primary' : 'text-muted-foreground'
-          }`} />
+          <Upload
+            className={`h-12 w-12 transition-colors ${
+              isDragOver ? "text-primary" : "text-muted-foreground"
+            }`}
+          />
           <div className="text-center space-y-2">
             <h3 className="font-medium text-lg">
-              {isDragOver ? 'Drop your photo here' : 'Add your photo'}
+              {isDragOver ? "Drop your photo here" : "Add your photo"}
             </h3>
             <p className="text-sm text-muted-foreground">
               Drag & drop or click to select
@@ -407,8 +409,12 @@ export function ImageUploader({
       ) : (
         <div className="w-full space-y-4">
           <div className="text-center space-y-1">
-            <h3 className="text-xl font-semibold text-green-700">🎉 Your image is ready!</h3>
-            <p className="text-sm text-muted-foreground">Make any final adjustments below</p>
+            <h3 className="text-xl font-semibold text-green-700">
+              🎉 Your image is ready!
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Make any final adjustments below
+            </p>
           </div>
 
           <div className="relative w-full aspect-square rounded-xl overflow-hidden border-2 border-green-200 bg-green-50/30">
@@ -436,7 +442,7 @@ export function ImageUploader({
                 Reset
               </Button>
             </div>
-            
+
             <div className="space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
@@ -465,7 +471,9 @@ export function ImageUploader({
                 <Label className="text-sm font-medium">Position</Label>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <Label className="text-xs text-muted-foreground">← Left | Right →</Label>
+                    <Label className="text-xs text-muted-foreground">
+                      ← Left | Right →
+                    </Label>
                     <Slider
                       min={0}
                       max={100}
@@ -478,7 +486,9 @@ export function ImageUploader({
                     />
                   </div>
                   <div className="space-y-1">
-                    <Label className="text-xs text-muted-foreground">↑ Up | Down ↓</Label>
+                    <Label className="text-xs text-muted-foreground">
+                      ↑ Up | Down ↓
+                    </Label>
                     <Slider
                       min={0}
                       max={100}
@@ -537,7 +547,12 @@ export function ImageUploader({
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => setPosition(prev => ({ ...prev, rotation: (prev.rotation + 90) % 360 }))}
+                    onClick={() =>
+                      setPosition((prev) => ({
+                        ...prev,
+                        rotation: (prev.rotation + 90) % 360,
+                      }))
+                    }
                     className="text-xs h-7"
                   >
                     Quick rotate 90°
@@ -570,11 +585,9 @@ export function ImageUploader({
                     fetch(resultImage)
                       .then((res) => res.blob())
                       .then((blob) => {
-                        const file = new File(
-                          [blob],
-                          "my-custom-image.png",
-                          { type: "image/png" },
-                        );
+                        const file = new File([blob], "my-custom-image.png", {
+                          type: "image/png",
+                        });
                         navigator
                           .share({
                             title: "My Custom Image",
@@ -614,11 +627,7 @@ export function ImageUploader({
             </Button>
           </div>
 
-          <Button
-            variant="ghost"
-            onClick={startOver}
-            className="w-full"
-          >
+          <Button variant="ghost" onClick={startOver} className="w-full">
             Start over with new photo
           </Button>
         </div>
@@ -627,7 +636,9 @@ export function ImageUploader({
       {/* Privacy Notice */}
       <div className="flex items-center gap-2 text-xs text-muted-foreground bg-muted/30 px-3 py-2 rounded-lg mt-2">
         <Shield className="h-4 w-4 text-green-600" />
-        <span>Your images are processed securely and never saved to our servers</span>
+        <span>
+          Your images are processed securely and never saved to our servers
+        </span>
       </div>
 
       <canvas ref={canvasRef} style={{ display: "none" }} />

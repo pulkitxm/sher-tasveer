@@ -17,8 +17,8 @@ export default function NotFound() {
         <h1 className="text-4xl font-bold mb-4">Team Not Found</h1>
 
         <p className="text-muted-foreground max-w-md mb-8">
-          We couldn&apos;t find the team you&apos;re looking for. It may have been removed
-          or you might have mistyped the address.
+          We couldn&apos;t find the team you&apos;re looking for. It may have
+          been removed or you might have mistyped the address.
         </p>
 
         <div className="flex gap-4">

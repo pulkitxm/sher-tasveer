@@ -1,9 +1,9 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 const creators = [
-  { name: 'Pulkit', link: 'https://pulkitxm.com' },
-  { name: 'Ayush', link: 'https://x.com/agayushh' },
-  { name: 'Kanak', link: 'https://x.com/kanaktwts' },
+  { name: "Pulkit", link: "https://pulkitxm.com" },
+  { name: "Ayush", link: "https://x.com/agayushh" },
+  { name: "Kanak", link: "https://x.com/kanaktwts" },
 ];
 
 export default function Footer() {
